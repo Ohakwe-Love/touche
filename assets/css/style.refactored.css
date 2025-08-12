@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+:root {
+    --bg: #ffffff;
+    --theme-color: #e9ecef;
+    --neutral-color: #000000;
+    --primary-text-color: #6C757D;
+    --primary-font-family: "Lato", sans-serif;
+    --heading-font-family: "Playfair Display", serif;
+    --primary-color: #f5a637;
+    --dark-color: #000000;
+    --light-color: #ffffff;
+}
+
+:root[data-theme='dark'] {
+    --bg: #212529;
+    --theme-color: #343A40;
+    --neutral-color: #ffffff;
+    --primary-text-color: #adb5bd;
+    --primary-color: #e6c27a;
+    --dark-color: #ffffff;
+    --light-color: #181818;
+}
+
+:root[data-theme='light'] {
+    --bg: #ffffff;
+    --theme-color: #e9ecef;
+    --neutral-color: #000000;
+    --primary-text-color: #6C757D;
+    --primary-color: #f5a637;
+    --dark-color: #000000;
+    --light-color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--primary-font-family);
+    background: var(--bg);
+    color: var(--primary-text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--heading-font-family);
+    color: var(--neutral-color);
+}
+
+::selection {
+    background: var(--primary-color);
+    color: var(--neutral-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* HEADER STYLES */
+.site-header {
+    position: relative;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.site-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--bg);
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+    z-index: -1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.site-header.scrolled {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.site-header.scrolled::after {
+    transform: translateY(0);
+}
+
+/* Header text is always white when at the top */
+.site-header,
+.site-header nav ul li a,
+.site-header a.logo h2,
+.site-header a {
+    color: var(--light-color) !important;
+}
+
+/* Header text changes with theme only when scrolled */
+.site-header.scrolled,
+.site-header.scrolled nav ul li a,
+.site-header.scrolled a.logo h2,
+.site-header.scrolled a {
+    color: var(--dark-color);
+}
+
+:root[data-theme='dark'] .site-header.scrolled,
+:root[data-theme='dark'] .site-header.scrolled nav ul li a,
+:root[data-theme='dark'] .site-header.scrolled a.logo h2,
+:root[data-theme='dark'] .site-header.scrolled a {
+    color: var(--neutral-color);
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    list-style: none;
+}
+
+header nav ul li a {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: inherit;
+}
+
+header a.logo h2 {
+    font-size: 30px;
+    font-weight: 300;
+    font-style: italic;
+    transition: 0.5s ease;
+    color: inherit;
+}
+
+header a {
+    color: inherit;
+    transition: 0.5s ease;
+}
+
+header a:hover,
+header a.logo h2:hover {
+    color: var(--primary-color);
+}
+
+/* THEME TOGGLE SWITCH */
+.switch {
+    width: 50px;
+    height: 22px;
+    background: var(--theme-color);
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s ease;
+    display: block;
+}
+
+.switch::before {
+    font-family: "Font Awesome 6 Free";
+    content: "\f185";
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 1.5px;
+    left: 5px;
+    transition: transform 0.3s cubic-bezier(.68, -0.55, .27, 1.55);
+    color: var(--neutral-color);
+}
+
+/* Animate knob and icon for dark mode */
+:root[data-theme='dark'] .switch::before {
+    content: "\f186";
+    transform: translateX(24px);
+}
+
+#modeToggle:checked+.main-container .switch::before {
+    content: "\f186";
+    transform: translateX(24px);
+}
+
+/* HERO SECTION */
+.hero-container {
+    height: 120vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/1.jpg") center/cover;
+    background-attachment: fixed;
+}
