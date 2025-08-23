@@ -7,6 +7,7 @@
   --neutral-color: #000000;
   --primary-text-color: #6C757D;
   --normal-text-color: #ffffffbf;
+  --sec-text-color: #6C757D;
   --primary-font-family: "Lato", sans-serif;
   --heading-font-family: "Playfair Display", serif;
   --primary-color: #f5a637;
@@ -42,6 +43,7 @@
 @media (prefers-color-scheme: dark) {
   .switch::before {
     content: "\f186";
+    content: "";
     transform: translateX(24px);
   }
 }
@@ -212,13 +214,27 @@ body {
   color: var(--neutral-color);
 }
 
+.menu-toggle {
+  display: none;
+}
+
 :root[data-theme='dark'] .switch::before {
   content: "\f186";
   transform: translateX(24px);
 }
 
+@media (max-width: 900px) {
+  .site-header nav ul {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 20px;
+  }
+}
+
 .hero-container {
-  /* height: 120vh; */
   background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("../imgs/1.jpg") center/cover;
   background-attachment: fixed;
 }
@@ -239,24 +255,24 @@ body {
   text-align: center;
 }
 
-.hero-text h5{
+.hero-text h5 {
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--normal-text-color);
 }
 
-.hero-text h5 span{
+.hero-text h5 span {
   color: var(--primary-color);
 }
 
-.hero-text h1{
+.hero-text h1 {
   font-size: 75px;
   line-height: 2;
   color: var(--white);
 }
 
-.hero-text p{
+.hero-text p {
   font-size: 15px;
   /* font-weight: 600; */
   word-spacing: 2px;
@@ -274,7 +290,7 @@ body {
   letter-spacing: 1px;
   font-size: 12px;
   text-transform: uppercase;
-  transition:  0.3s ease, color 0.3s ease;
+  transition: 0.3s ease, color 0.3s ease;
 }
 
 .hero-icons {
@@ -293,7 +309,7 @@ body {
 
 .hero-icons .icons-container a {
   color: var(--normal-text-color);
-  font-size: 20px;
+  /* font-size: 20px; */
   transition: color 0.3s ease;
 }
 
@@ -305,4 +321,143 @@ body {
 .hero-icons .icons-container p {
   color: var(--normal-text-color);
   font-family: var(--heading-font-family);
+}
+
+@media (max-width: 900px) {
+  .hero-text h1 {
+    font-size: 50px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-text {
+    width: 100%;
+  }
+
+  .hero-icons {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .hero-icons .icons-container:nth-child(2) {
+    gap: 10px;
+    align-items: center;
+  }
+
+  .hero-icons .icons-container p {
+    line-height: 1;
+    text-align: left;
+  }
+}
+
+footer {
+  background-color: var(--black);
+  font-size: 15px;
+  color: var(--sec-text-color);
+}
+
+.footer-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 50px 0;
+  gap: 20px;
+}
+
+.footer-col {
+  padding: 10px 20px;
+  /* background-color: orange; */
+}
+
+.footer-row h3 {
+  font-family: var(--primary-font-family);
+  font-size: 15px;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
+.footer-row p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.footer-col ul li {
+  font-size: 14px;
+  list-style: none;
+  line-height: 2;
+}
+
+.footer-col ul li a {
+  color: var(--sec-text-color);
+  transition: all 0.4s ease;
+  display: block;
+  text-transform: capitalize;
+}
+
+.footer-col ul li a:hover {
+  color: var(--primary-color);
+  transform: translateX(5px);
+}
+
+.footer-col .contact-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.footer-col .contact-info i {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  /* background-color: orange; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  transition: all 0.5s ease;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+
+.footer-col .contact-info:hover i {
+  color: var(--primary-color);
+  transform: scale(1.2);
+}
+
+.footer-col .contact-info:hover i.location {
+  color: var(--primary-color);
+  transform: scale(1);
+}
+
+.footer-col .contact-info a {
+  color: var(--primary-color);
+  font-size: 12px;
+  transition: all 0.3s ease;
+  padding-bottom: 5px;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-col .contact-info a::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: all 0.9s ease;
+  display: block;
+}
+
+.footer-col .contact-info a:hover::after {
+  width: 100%;
+}
+
+.footer-col .opening-hours {
+  margin-bottom: 20px;
 }
