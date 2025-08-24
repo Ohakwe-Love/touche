@@ -1,0 +1,5 @@
+.gallery-hero {
+    background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("../imgs/23.jpg") center/cover;
+    background-attachment: fixed;
+}
+
