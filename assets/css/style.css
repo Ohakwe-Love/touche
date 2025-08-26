@@ -388,7 +388,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--primary-text-color);
+  border-bottom: 1px dotted rgb(50, 50, 50);
   height: 150px;
   width: 100%;
   cursor: pointer;
@@ -409,6 +409,10 @@ body {
 .event_row label .event_content h3 {
   font-size: 20px;
   font-weight: 400;
+}
+
+.event_row label a{
+  color: var(--primary-text-color);
 }
 
 .top_event {
