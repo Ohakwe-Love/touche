@@ -1,22 +1,20 @@
 @font-face {
   font-family: 'Lato';
-  src: url('../fonts/Lato/static/Lato-Regular.ttf') format('truetype');
+  src: url('../fonts/Lato/Lato-Regular.ttf') format('truetype');
   font-weight: 400;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Lato';
-  src: url('../fonts/Lato/static/Lato-Bold.ttf') format('truetype');
+  src: url('../fonts/Lato/Lato-Bold.ttf') format('truetype');
   font-weight: 700;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Lato';
-  src: url('../fonts/Lato/static/Lato-Italic.ttf') format('truetype');
+  src: url('../fonts/Lato/Lato-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -26,16 +24,12 @@
   font-family: 'Playfair Display';
   src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf') format('truetype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
   font-family: 'Playfair Display';
   src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf') format('truetype');
   font-weight: 700;
-  font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
@@ -43,7 +37,6 @@
   src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
-  font-display: swap;
 }
 
 :root {
@@ -95,6 +88,7 @@
 
 /* Header text is white in dark mode, always */
 @media (prefers-color-scheme: dark) {
+
   .site-header,
   .site-header.scrolled,
   .site-header nav ul li a,
@@ -437,9 +431,14 @@ section {
 .cat-tab {
   padding-bottom: 10px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
   display: inline-block;
   position: relative;
+}
+
+.cat-tab:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .cat-tab.active::after {
@@ -466,10 +465,51 @@ section {
   justify-content: space-between;
   align-items: flex-start;
   padding-right: 10px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-.cat-desc {
-  max-width: 350px;
+.cat-item .cat-details {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  width: 90%;
+}
+
+.cat-item .cat-img {
+  width: 200px;
+  height: 100px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.cat-grid .cat-desc h3 {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 1199px) {}
+
+@media (max-width: 768px) {
+  .cat-tabs {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .cat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cat-item {
+    flex-wrap: wrap;
+  }
+
+  .cat-item .cat-details {
+    flex-wrap: wrap;
+  }
 }
 
 /* upcoming_events */
@@ -547,13 +587,12 @@ section {
 #event1:checked+label,
 #event2:checked+label,
 #event3:checked+label {
-  /* display: none; */
   height: 0;
   overflow: hidden;
 }
 
 .about_event {
-  width: 35%;
+  max-width: 500px;
   display: flex;
   gap: 20px;
   align-items: flex-start;
@@ -571,6 +610,39 @@ section {
 
 .about_event h2 {
   color: var(--white);
+}
+
+@media (max-width: 1199px) {
+  .event_row label {
+    padding: 0 20px;
+  }
+
+  .event_row label .event_content {
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  #event1:checked~.top_event_1,
+  #event2:checked~.top_event_2,
+  #event3:checked~.top_event_3 {
+    height: 100vh;
+    overflow: auto;
+    padding: 20px;
+  }
+
+  .event_row label {
+    height: auto;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .event_row label .event_content {
+    align-items: flex-start;
+    width: 100%;
+  }
 }
 
 /* upcoming_events end */
