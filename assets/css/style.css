@@ -1,5 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Oxygen:wght@300;400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Young+Serif&display=swap');
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/static/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/static/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/static/Lato-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 :root {
   --bg: #ffffff;
@@ -50,7 +95,6 @@
 
 /* Header text is white in dark mode, always */
 @media (prefers-color-scheme: dark) {
-
   .site-header,
   .site-header.scrolled,
   .site-header nav ul li a,
@@ -250,6 +294,7 @@ body {
 }
 
 .hero-container {
+  padding: 0;
   background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("../imgs/1.jpg") center/cover;
   background-attachment: fixed;
 }
@@ -374,6 +419,59 @@ body {
   }
 }
 
+/* categories */
+section {
+  padding: 60px 0;
+}
+
+.cat-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.cat-tab {
+  padding-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.cat-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 10px;
+  width: 100%;
+  background-color: var(--primary-color);
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.cat-item {
+  border-bottom: 1px solid var(--theme-color);
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-right: 10px;
+}
+
+.cat-desc {
+  max-width: 350px;
+}
+
 /* upcoming_events */
 .upcoming_events {
   padding: 70px 0 0;
@@ -392,6 +490,7 @@ body {
   height: 150px;
   width: 100%;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
 }
 
 .event_row label .event_content {
@@ -411,17 +510,18 @@ body {
   font-weight: 400;
 }
 
-.event_row label a{
+.event_row label a {
   color: var(--primary-text-color);
 }
 
 .top_event {
-  height: 100vh;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
   color: var(--white);
-  padding: 30px 50px;
   display: flex;
   align-items: center;
-  display: none;
+  transition: 0.5s ease-in-out;
 }
 
 .top_event_1 {
@@ -439,13 +539,17 @@ body {
 #event1:checked~.top_event_1,
 #event2:checked~.top_event_2,
 #event3:checked~.top_event_3 {
-  display: flex;
+  height: 100vh;
+  overflow: auto;
+  padding: 30px 50px;
 }
 
 #event1:checked+label,
 #event2:checked+label,
 #event3:checked+label {
-  display: none;
+  /* display: none; */
+  height: 0;
+  overflow: hidden;
 }
 
 .about_event {
@@ -533,10 +637,6 @@ body {
 /* newsletter end */
 
 /* gallery */
-.gallery {
-  padding: 70px 0;
-}
-
 .gallery-grid {
   column-count: 3;
   column-gap: 1rem;
