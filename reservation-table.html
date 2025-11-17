@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Reservation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --theme-color: #e9ecef;
+      --neutral-color: #000000;
+      --primary-text-color: #6C757D;
+      --normal-text-color: #ffffffbf;
+      --sec-text-color: #6C757D;
+      --primary-font-family: "Lato", sans-serif;
+      --heading-font-family: "Playfair Display", serif;
+      --primary-color: #f5a637;
+      --dark-color: #000000;
+      --light-color: #ffffff;
+      --white: #ffffff;
+      --black: #000000;
+      --opacity: 0.99;
+    }
+
+    :root[data-theme='dark'] {
+      --bg: #212529;
+      --theme-color: #343A40;
+      --neutral-color: #ffffff;
+      --primary-text-color: #adb5bd;
+      --dark-color: #ffffff;
+      --light-color: #181818;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--primary-font-family);
+      background-color: var(--theme-color);
+      color: var(--neutral-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-family: var(--primary-font-family);
+      font-weight: 600;
+      color: var(--white);
+      transition: transform 0.2s ease;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-family: var(--heading-font-family);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--neutral-color);
+    }
+
+    .subtitle {
+      color: var(--primary-text-color);
+      margin-bottom: 3rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-container {
+      background: var(--bg);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      text-align: left;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-text-color);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--theme-color);
+      border-radius: 5px;
+      font-family: var(--primary-font-family);
+      font-size: 1rem;
+      background: var(--bg);
+      color: var(--neutral-color);
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    input::placeholder {
+      color: var(--primary-text-color);
+      opacity: 0.7;
+    }
+
+    /* Custom Dropdown */
+    .custom-select {
+      position: relative;
+      width: 100%;
+    }
+
+    .select-display {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--theme-color);
+      border-radius: 5px;
+      background: var(--bg);
+      color: var(--neutral-color);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .select-display:hover,
+    .select-display.active {
+      border-color: var(--primary-color);
+    }
+
+    .select-arrow {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--neutral-color);
+      transition: transform 0.3s ease;
+    }
+
+    .select-display.active .select-arrow {
+      transform: rotate(180deg);
+    }
+
+    .select-options {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border: 1px solid var(--theme-color);
+      border-radius: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .select-options.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    .select-option {
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      color: var(--neutral-color);
+    }
+
+    .select-option:hover {
+      background-color: var(--theme-color);
+    }
+
+    .select-option.selected {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    /* Custom Date Picker */
+    .date-picker-wrapper {
+      position: relative;
+    }
+
+    .date-display {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--theme-color);
+      border-radius: 5px;
+      background: var(--bg);
+      color: var(--neutral-color);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .date-display:hover,
+    .date-display.active {
+      border-color: var(--primary-color);
+    }
+
+    .calendar-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--neutral-color);
+    }
+
+    .calendar-popup {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      background: var(--bg);
+      border: 1px solid var(--theme-color);
+      border-radius: 5px;
+      padding: 1rem;
+      z-index: 100;
+      display: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      min-width: 300px;
+    }
+
+    .calendar-popup.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--theme-color);
+    }
+
+    .calendar-nav {
+      background: none;
+      border: none;
+      color: var(--neutral-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+    }
+
+    .calendar-nav:hover {
+      background-color: var(--theme-color);
+    }
+
+    .calendar-month-year {
+      font-weight: 600;
+      color: var(--neutral-color);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+
+    .calendar-day-header {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-text-color);
+      padding: 0.5rem;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.2s ease;
+      color: var(--neutral-color);
+      font-size: 0.9rem;
+    }
+
+    .calendar-day:hover:not(.disabled):not(.empty) {
+      background-color: var(--theme-color);
+    }
+
+    .calendar-day.selected {
+      background-color: var(--primary-color);
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .calendar-day.disabled {
+      color: var(--primary-text-color);
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .calendar-day.empty {
+      cursor: default;
+    }
+
+    .calendar-day.today {
+      border: 2px solid var(--primary-color);
+    }
+
+    /* Custom Time Picker */
+    .time-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 0.5rem 0;
+    }
+
+    .time-option {
+      padding: 0.7rem;
+      text-align: center;
+      border: 1px solid var(--theme-color);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--neutral-color);
+      font-size: 0.9rem;
+    }
+
+    .time-option:hover {
+      background-color: var(--theme-color);
+      border-color: var(--primary-color);
+    }
+
+    .time-option.selected {
+      background-color: var(--primary-color);
+      color: var(--white);
+      border-color: var(--primary-color);
+    }
+
+    .error {
+      color: #dc3545;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    .submit-btn {
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      padding: 1rem 3rem;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: var(--primary-font-family);
+      cursor: pointer;
+      border-radius: 5px;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-color);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .success-message {
+      background: #28a745;
+      color: white;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .calendar-popup {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .calendar-popup.show {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <div class="container">
+    <h1>Make online reservation</h1>
+    <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.</p>
+
+    <div class="form-container">
+      <form id="reservationForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" placeholder="Full name" required>
+            <span class="error" id="nameError">Please enter your full name</span>
+          </div>
+
+          <div class="form-group">
+            <label>Number of Persons</label>
+            <div class="custom-select" id="personsSelect">
+              <div class="select-display">
+                <span class="select-value">2 persons</span>
+                <div class="select-arrow"></div>
+              </div>
+              <div class="select-options">
+                <div class="select-option" data-value="1">1 person</div>
+                <div class="select-option selected" data-value="2">2 persons</div>
+                <div class="select-option" data-value="3">3 persons</div>
+                <div class="select-option" data-value="4">4 persons</div>
+                <div class="select-option" data-value="5">5 persons</div>
+                <div class="select-option" data-value="6">6 persons</div>
+                <div class="select-option" data-value="7">7 persons</div>
+                <div class="select-option" data-value="8">8 persons</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Phone number" required>
+            <span class="error" id="phoneError">Please enter a valid phone number</span>
+          </div>
+
+          <div class="form-group">
+            <label>Reservation Date</label>
+            <div class="date-picker-wrapper">
+              <div class="date-display" id="dateDisplay">
+                <span class="date-value">02/12/2021</span>
+                <svg class="calendar-icon" viewBox="0 0 24 24">
+                  <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                </svg>
+              </div>
+              <div class="calendar-popup" id="calendarPopup">
+                <div class="calendar-header">
+                  <button type="button" class="calendar-nav" id="prevMonth">◀</button>
+                  <span class="calendar-month-year" id="monthYear"></span>
+                  <button type="button" class="calendar-nav" id="nextMonth">▶</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+              </div>
+            </div>
+            <span class="error" id="dateError">Please select a valid date</span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Email address" required>
+            <span class="error" id="emailError">Please enter a valid email</span>
+          </div>
+
+          <div class="form-group">
+            <label>Reservation Time</label>
+            <div class="custom-select" id="timeSelect">
+              <div class="select-display">
+                <span class="select-value">06:00 PM</span>
+                <div class="select-arrow"></div>
+              </div>
+              <div class="select-options">
+                <div class="time-picker-grid">
+                  <div class="time-option" data-value="11:00">11:00 AM</div>
+                  <div class="time-option" data-value="11:30">11:30 AM</div>
+                  <div class="time-option" data-value="12:00">12:00 PM</div>
+                  <div class="time-option" data-value="12:30">12:30 PM</div>
+                  <div class="time-option" data-value="13:00">01:00 PM</div>
+                  <div class="time-option" data-value="13:30">01:30 PM</div>
+                  <div class="time-option" data-value="14:00">02:00 PM</div>
+                  <div class="time-option" data-value="14:30">02:30 PM</div>
+                  <div class="time-option" data-value="17:00">05:00 PM</div>
+                  <div class="time-option" data-value="17:30">05:30 PM</div>
+                  <div class="time-option selected" data-value="18:00">06:00 PM</div>
+                  <div class="time-option" data-value="18:30">06:30 PM</div>
+                  <div class="time-option" data-value="19:00">07:00 PM</div>
+                  <div class="time-option" data-value="19:30">07:30 PM</div>
+                  <div class="time-option" data-value="20:00">08:00 PM</div>
+                  <div class="time-option" data-value="20:30">08:30 PM</div>
+                  <div class="time-option" data-value="21:00">09:00 PM</div>
+                </div>
+              </div>
+            </div>
+            <span class="error" id="timeError">Please select a time</span>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">RESERVE A TABLE</button>
+      </form>
+
+      <div class="success-message" id="successMessage">
+        Reservation successful! We'll send a confirmation to your email.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State management
+    let selectedPersons = 2;
+    let selectedDate = new Date(2021, 11, 2);
+    let selectedTime = '18:00';
+    let currentMonth = new Date();
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      initCustomSelects();
+      initDatePicker();
+      initFormValidation();
+    });
+
+    // Custom Select Functionality
+    function initCustomSelects() {
+      // Persons select
+      const personsSelect = document.getElementById('personsSelect');
+      const personsDisplay = personsSelect.querySelector('.select-display');
+      const personsOptions = personsSelect.querySelector('.select-options');
+      
+      personsDisplay.addEventListener('click', function(e) {
+        e.stopPropagation();
+        personsDisplay.classList.toggle('active');
+        personsOptions.classList.toggle('show');
+        
+        // Close other dropdowns
+        document.getElementById('timeSelect').querySelector('.select-display').classList.remove('active');
+        document.getElementById('timeSelect').querySelector('.select-options').classList.remove('show');
+      });
+
+      personsOptions.querySelectorAll('.select-option').forEach(option => {
+        option.addEventListener('click', function() {
+          personsOptions.querySelectorAll('.select-option').forEach(opt => opt.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedPersons = this.dataset.value;
+          personsDisplay.querySelector('.select-value').textContent = this.textContent;
+          personsDisplay.classList.remove('active');
+          personsOptions.classList.remove('show');
+        });
+      });
+
+      // Time select
+      const timeSelect = document.getElementById('timeSelect');
+      const timeDisplay = timeSelect.querySelector('.select-display');
+      const timeOptions = timeSelect.querySelector('.select-options');
+      
+      timeDisplay.addEventListener('click', function(e) {
+        e.stopPropagation();
+        timeDisplay.classList.toggle('active');
+        timeOptions.classList.toggle('show');
+        
+        // Close other dropdowns
+        personsDisplay.classList.remove('active');
+        personsOptions.classList.remove('show');
+      });
+
+      timeOptions.querySelectorAll('.time-option').forEach(option => {
+        option.addEventListener('click', function() {
+          timeOptions.querySelectorAll('.time-option').forEach(opt => opt.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedTime = this.dataset.value;
+          timeDisplay.querySelector('.select-value').textContent = this.textContent;
+          timeDisplay.classList.remove('active');
+          timeOptions.classList.remove('show');
+        });
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function() {
+        personsDisplay.classList.remove('active');
+        personsOptions.classList.remove('show');
+        timeDisplay.classList.remove('active');
+        timeOptions.classList.remove('show');
+      });
+    }
+
+    // Custom Date Picker
+    function initDatePicker() {
+      const dateDisplay = document.getElementById('dateDisplay');
+      const calendarPopup = document.getElementById('calendarPopup');
+      const calendarGrid = document.getElementById('calendarGrid');
+      const monthYear = document.getElementById('monthYear');
+      const prevMonth = document.getElementById('prevMonth');
+      const nextMonth = document.getElementById('nextMonth');
+
+      dateDisplay.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dateDisplay.classList.toggle('active');
+        calendarPopup.classList.toggle('show');
+        renderCalendar();
+      });
+
+      prevMonth.addEventListener('click', function() {
+        currentMonth.setMonth(currentMonth.getMonth() - 1);
+        renderCalendar();
+      });
+
+      nextMonth.addEventListener('click', function() {
+        currentMonth.setMonth(currentMonth.getMonth() + 1);
+        renderCalendar();
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!calendarPopup.contains(e.target) && !dateDisplay.contains(e.target)) {
+          dateDisplay.classList.remove('active');
+          calendarPopup.classList.remove('show');
+        }
+      });
+
+      function renderCalendar() {
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
+        
+        monthYear.textContent = currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        calendarGrid.innerHTML = '';
+        
+        // Day headers
+        const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        dayHeaders.forEach(day => {
+          const header = document.createElement('div');
+          header.className = 'calendar-day-header';
+          header.textContent = day;
+          calendarGrid.appendChild(header);
+        });
+        
+        // Empty cells before first day
+        for (let i = 0; i < firstDay; i++) {
+          const emptyDay = document.createElement('div');
+          emptyDay.className = 'calendar-day empty';
+          calendarGrid.appendChild(emptyDay);
+        }
+        
+        // Calendar days
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dayElement = document.createElement('div');
+          dayElement.className = 'calendar-day';
+          dayElement.textContent = day;
+          
+          const dayDate = new Date(year, month, day);
+          dayDate.setHours(0, 0, 0, 0);
+          
+          // Check if date is in the past
+          if (dayDate < today) {
+            dayElement.classList.add('disabled');
+          } else {
+            dayElement.addEventListener('click', function() {
+              selectedDate = new Date(year, month, day);
+              dateDisplay.querySelector('.date-value').textContent = 
+                selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+              dateDisplay.classList.remove('active');
+              calendarPopup.classList.remove('show');
+            });
+          }
+          
+          // Highlight today
+          if (dayDate.getTime() === today.getTime()) {
+            dayElement.classList.add('today');
+          }
+          
+          // Highlight selected date
+          if (selectedDate && 
+              dayDate.getFullYear() === selectedDate.getFullYear() &&
+              dayDate.getMonth() === selectedDate.getMonth() &&
+              dayDate.getDate() === selectedDate.getDate()) {
+            dayElement.classList.add('selected');
+          }
+          
+          calendarGrid.appendChild(dayElement);
+        }
+      }
+    }
+
+    // Form Validation
+    function initFormValidation() {
+      document.getElementById('reservationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        let isValid = true;
+        document.querySelectorAll('.error').forEach(err => err.classList.remove('show'));
+
+        // Validate full name
+        const fullname = document.getElementById('fullname').value.trim();
+        if (fullname.length < 2) {
+          document.getElementById('nameError').classList.add('show');
+          isValid = false;
+        }
+
+        // Validate phone
+        const phone = document.getElementById('phone').value.trim();
+        const phoneRegex = /^[0-9+\-\s()]{10,}$/;
+        if (!phoneRegex.test(phone)) {
+          document.getElementById('phoneError').classList.add('show');
+          isValid = false;
+        }
+
+        // Validate email
+        const email = document.getElementById('email').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          document.getElementById('emailError').classList.add('show');
+          isValid = false;
+        }
+
+        // Validate date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selectedDate < today) {
+          document.getElementById('dateError').classList.add('show');
+          isValid = false;
+        }
+
+        if (isValid) {
+          const successMsg = document.getElementById('successMessage');
+          successMsg.classList.add('show');
+
+          const reservation = {
+            name: fullname,
+            phone: phone,
+            email: email,
+            persons: selectedPersons,
+            date: selectedDate.toLocaleDateString(),
+            time: selectedTime
+          };
+          console.log('Reservation Details:', reservation);
+
+          setTimeout(() => {
+            this.reset();
+            selectedPersons = 2;
+            selectedDate = new Date(2021, 11, 2);
+            selectedTime = '18:00';
+            document.getElementById('personsSelect').querySelector('.select-value').textContent = '2 persons';
+            document.getElementById('dateDisplay').querySelector('.date-value').textContent = '02/12/2021';
+            document.getElementById('timeSelect').querySelector('.select-value').textContent = '06:00 PM';
+            successMsg.classList.remove('show');
+          }, 3000);
+        }
+      });
+    }
+
+    // Theme toggle
+    function toggleTheme() {
+      const root = document.documentElement;
+      const currentTheme = root.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+    }
+  </script>
+</body>
+</html>

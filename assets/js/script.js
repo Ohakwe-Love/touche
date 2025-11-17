@@ -69,17 +69,17 @@ const closeNav = document.querySelector(".close-nav");
 if (openNav && navigation && closeNav) {
     // Toggle instead of separate open/close
     const toggleNav = () => navigation.classList.toggle("active");
-    
+
     openNav.addEventListener("click", toggleNav);
     closeNav.addEventListener("click", toggleNav);
-    
+
     // Optional: Close on outside click
     document.addEventListener("click", (e) => {
         if (!navigation.contains(e.target) && !openNav.contains(e.target)) {
             navigation.classList.remove("active");
         }
     });
-    
+
     // Optional: Close on Escape key
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && navigation.classList.contains("active")) {
@@ -90,14 +90,14 @@ if (openNav && navigation && closeNav) {
 
 if (openNav) {
     let lastScrollY = window.scrollY;
-    
+
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
-        
+
         // Add 'fixed' class when scrolled down more than 100px
         if (currentScrollY > 100) {
             openNav.classList.add('fixed');
-            
+
             // Optional: Hide when scrolling down, show when scrolling up
             if (currentScrollY > lastScrollY) {
                 openNav.classList.add('hidden');
@@ -107,7 +107,7 @@ if (openNav) {
         } else {
             openNav.classList.remove('fixed', 'hidden');
         }
-        
+
         lastScrollY = currentScrollY;
     });
 }
@@ -146,3 +146,248 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// State management
+let selectedPersons = 2;
+let selectedDate = new Date(2021, 11, 2);
+let selectedTime = '18:00';
+let currentMonth = new Date();
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function () {
+    initCustomSelects();
+    initDatePicker();
+    initFormValidation();
+});
+
+// Custom Select Functionality
+function initCustomSelects() {
+    // Persons select
+    const personsSelect = document.getElementById('personsSelect');
+    const personsDisplay = personsSelect.querySelector('.select-display');
+    const personsOptions = personsSelect.querySelector('.select-options');
+
+    personsDisplay.addEventListener('click', function (e) {
+        e.stopPropagation();
+        personsDisplay.classList.toggle('active');
+        personsOptions.classList.toggle('show');
+
+        // Close other dropdowns
+        document.getElementById('timeSelect').querySelector('.select-display').classList.remove('active');
+        document.getElementById('timeSelect').querySelector('.select-options').classList.remove('show');
+    });
+
+    personsOptions.querySelectorAll('.select-option').forEach(option => {
+        option.addEventListener('click', function () {
+            personsOptions.querySelectorAll('.select-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedPersons = this.dataset.value;
+            personsDisplay.querySelector('.select-value').textContent = this.textContent;
+            personsDisplay.classList.remove('active');
+            personsOptions.classList.remove('show');
+        });
+    });
+
+    // Time select
+    const timeSelect = document.getElementById('timeSelect');
+    const timeDisplay = timeSelect.querySelector('.select-display');
+    const timeOptions = timeSelect.querySelector('.select-options');
+
+    timeDisplay.addEventListener('click', function (e) {
+        e.stopPropagation();
+        timeDisplay.classList.toggle('active');
+        timeOptions.classList.toggle('show');
+
+        // Close other dropdowns
+        personsDisplay.classList.remove('active');
+        personsOptions.classList.remove('show');
+    });
+
+    timeOptions.querySelectorAll('.time-option').forEach(option => {
+        option.addEventListener('click', function () {
+            timeOptions.querySelectorAll('.time-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedTime = this.dataset.value;
+            timeDisplay.querySelector('.select-value').textContent = this.textContent;
+            timeDisplay.classList.remove('active');
+            timeOptions.classList.remove('show');
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function () {
+        personsDisplay.classList.remove('active');
+        personsOptions.classList.remove('show');
+        timeDisplay.classList.remove('active');
+        timeOptions.classList.remove('show');
+    });
+}
+
+// Custom Date Picker
+function initDatePicker() {
+    const dateDisplay = document.getElementById('dateDisplay');
+    const calendarPopup = document.getElementById('calendarPopup');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const monthYear = document.getElementById('monthYear');
+    const prevMonth = document.getElementById('prevMonth');
+    const nextMonth = document.getElementById('nextMonth');
+
+    dateDisplay.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dateDisplay.classList.toggle('active');
+        calendarPopup.classList.toggle('show');
+        renderCalendar();
+    });
+
+    prevMonth.addEventListener('click', function () {
+        currentMonth.setMonth(currentMonth.getMonth() - 1);
+        renderCalendar();
+    });
+
+    nextMonth.addEventListener('click', function () {
+        currentMonth.setMonth(currentMonth.getMonth() + 1);
+        renderCalendar();
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!calendarPopup.contains(e.target) && !dateDisplay.contains(e.target)) {
+            dateDisplay.classList.remove('active');
+            calendarPopup.classList.remove('show');
+        }
+    });
+
+    function renderCalendar() {
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
+
+        monthYear.textContent = currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        calendarGrid.innerHTML = '';
+
+        // Day headers
+        const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        dayHeaders.forEach(day => {
+            const header = document.createElement('div');
+            header.className = 'calendar-day-header';
+            header.textContent = day;
+            calendarGrid.appendChild(header);
+        });
+
+        // Empty cells before first day
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDay = document.createElement('div');
+            emptyDay.className = 'calendar-day empty';
+            calendarGrid.appendChild(emptyDay);
+        }
+
+        // Calendar days
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            dayElement.textContent = day;
+
+            const dayDate = new Date(year, month, day);
+            dayDate.setHours(0, 0, 0, 0);
+
+            // Check if date is in the past
+            if (dayDate < today) {
+                dayElement.classList.add('disabled');
+            } else {
+                dayElement.addEventListener('click', function () {
+                    selectedDate = new Date(year, month, day);
+                    dateDisplay.querySelector('.date-value').textContent =
+                        selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+                    dateDisplay.classList.remove('active');
+                    calendarPopup.classList.remove('show');
+                });
+            }
+
+            // Highlight today
+            if (dayDate.getTime() === today.getTime()) {
+                dayElement.classList.add('today');
+            }
+
+            // Highlight selected date
+            if (selectedDate &&
+                dayDate.getFullYear() === selectedDate.getFullYear() &&
+                dayDate.getMonth() === selectedDate.getMonth() &&
+                dayDate.getDate() === selectedDate.getDate()) {
+                dayElement.classList.add('selected');
+            }
+
+            calendarGrid.appendChild(dayElement);
+        }
+    }
+}
+
+// Form Validation
+function initFormValidation() {
+    document.getElementById('reservationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        let isValid = true;
+        document.querySelectorAll('.error').forEach(err => err.classList.remove('show'));
+
+        // Validate full name
+        const fullname = document.getElementById('fullname').value.trim();
+        if (fullname.length < 2) {
+            document.getElementById('nameError').classList.add('show');
+            isValid = false;
+        }
+
+        // Validate phone
+        const phone = document.getElementById('phone').value.trim();
+        const phoneRegex = /^[0-9+\-\s()]{10,}$/;
+        if (!phoneRegex.test(phone)) {
+            document.getElementById('phoneError').classList.add('show');
+            isValid = false;
+        }
+
+        // Validate email
+        const email = document.getElementById('email').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailError').classList.add('show');
+            isValid = false;
+        }
+
+        // Validate date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selectedDate < today) {
+            document.getElementById('dateError').classList.add('show');
+            isValid = false;
+        }
+
+        if (isValid) {
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.add('show');
+
+            const reservation = {
+                name: fullname,
+                phone: phone,
+                email: email,
+                persons: selectedPersons,
+                date: selectedDate.toLocaleDateString(),
+                time: selectedTime
+            };
+            console.log('Reservation Details:', reservation);
+
+            setTimeout(() => {
+                this.reset();
+                selectedPersons = 2;
+                selectedDate = new Date(2021, 11, 2);
+                selectedTime = '18:00';
+                document.getElementById('personsSelect').querySelector('.select-value').textContent = '2 persons';
+                document.getElementById('dateDisplay').querySelector('.date-value').textContent = '02/12/2021';
+                document.getElementById('timeSelect').querySelector('.select-value').textContent = '06:00 PM';
+                successMsg.classList.remove('show');
+            }, 3000);
+        }
+    });
+}

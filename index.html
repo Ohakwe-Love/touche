@@ -16,6 +16,7 @@
 
     <input type="checkbox" id="modeToggle" hidden />
     <main class="main-container">
+        <!-- hero container -->
         <section class="hero-container">
             <header class="site-header">
                 <div class="container">
@@ -169,7 +170,7 @@
         <!-- categories -->
         <section class="categories">
             <div class="container">
-                <div class="heading-container">
+                <div class="section-header">
                     <h2>Browse by categories</h2>
                     <p>Commodi rem veritatis quis eaque mollitia.</p>
                 </div>
@@ -274,9 +275,250 @@
         </section>
         <!-- categories end -->
 
+        <!-- reservation -->
+        <section class="reservation">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Make a reservation</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi
+                        in cum, beatae maiores quae qui.
+                    </p>
+                </div>
+
+                <div class="form-container">
+                    <form id="reservationForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="fullname">Full Name</label>
+                                <input type="text" id="fullname" placeholder="Full name" required>
+                                <span class="error" id="nameError">Please enter your full name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Number of Persons</label>
+                                <div class="custom-select" id="personsSelect">
+                                    <div class="select-display">
+                                        <span class="select-value">2 persons</span>
+                                        <div class="select-arrow"></div>
+                                    </div>
+                                    <div class="select-options">
+                                        <div class="select-option" data-value="1">1 person</div>
+                                        <div class="select-option selected" data-value="2">2 persons</div>
+                                        <div class="select-option" data-value="3">3 persons</div>
+                                        <div class="select-option" data-value="4">4 persons</div>
+                                        <div class="select-option" data-value="5">5 persons</div>
+                                        <div class="select-option" data-value="6">6 persons</div>
+                                        <div class="select-option" data-value="7">7 persons</div>
+                                        <div class="select-option" data-value="8">8 persons</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" placeholder="Phone number" required>
+                                <span class="error" id="phoneError">Please enter a valid phone number</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Reservation Date</label>
+                                <div class="date-picker-wrapper">
+                                    <div class="date-display" id="dateDisplay">
+                                        <span class="date-value">02/12/2021</span>
+                                        <svg class="calendar-icon" viewBox="0 0 24 24">
+                                            <path
+                                                d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="calendar-popup" id="calendarPopup">
+                                        <div class="calendar-header">
+                                            <button type="button" class="calendar-nav" id="prevMonth">◀</button>
+                                            <span class="calendar-month-year" id="monthYear"></span>
+                                            <button type="button" class="calendar-nav" id="nextMonth">▶</button>
+                                        </div>
+                                        <div class="calendar-grid" id="calendarGrid"></div>
+                                    </div>
+                                </div>
+                                <span class="error" id="dateError">Please select a valid date</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="Email address" required>
+                                <span class="error" id="emailError">Please enter a valid email</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Reservation Time</label>
+                                <div class="custom-select" id="timeSelect">
+                                    <div class="select-display">
+                                        <span class="select-value">06:00 PM</span>
+                                        <div class="select-arrow"></div>
+                                    </div>
+                                    <div class="select-options">
+                                        <div class="time-picker-grid">
+                                            <div class="time-option" data-value="11:00">11:00 AM</div>
+                                            <div class="time-option" data-value="11:30">11:30 AM</div>
+                                            <div class="time-option" data-value="12:00">12:00 PM</div>
+                                            <div class="time-option" data-value="12:30">12:30 PM</div>
+                                            <div class="time-option" data-value="13:00">01:00 PM</div>
+                                            <div class="time-option" data-value="13:30">01:30 PM</div>
+                                            <div class="time-option" data-value="14:00">02:00 PM</div>
+                                            <div class="time-option" data-value="14:30">02:30 PM</div>
+                                            <div class="time-option" data-value="17:00">05:00 PM</div>
+                                            <div class="time-option" data-value="17:30">05:30 PM</div>
+                                            <div class="time-option selected" data-value="18:00">06:00 PM</div>
+                                            <div class="time-option" data-value="18:30">06:30 PM</div>
+                                            <div class="time-option" data-value="19:00">07:00 PM</div>
+                                            <div class="time-option" data-value="19:30">07:30 PM</div>
+                                            <div class="time-option" data-value="20:00">08:00 PM</div>
+                                            <div class="time-option" data-value="20:30">08:30 PM</div>
+                                            <div class="time-option" data-value="21:00">09:00 PM</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="error" id="timeError">Please select a time</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">RESERVE A TABLE</button>
+                    </form>
+
+                    <div class="success-message" id="successMessage">
+                        Reservation successful! We'll send a confirmation to your email.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- reservation end -->
+
+        <!-- featured dishes -->
+        <section class="featured">
+            <div class="section-header">
+                <div class="section-label">Signature Collection</div>
+                <h2>Featured Dishes</h2>
+                <p>Handcrafted culinary masterpieces that define our kitchen's excellence</p>
+            </div>
+
+            <div class="slider-container">
+                <button class="slider-nav prev" onclick="moveSlide(-1)" aria-label="Previous">‹</button>
+                <button class="slider-nav next" onclick="moveSlide(1)" aria-label="Next">›</button>
+
+                <div class="slider-wrapper" id="sliderWrapper">
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=600&fit=crop"
+                                alt="Mediterranean Salmon">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-header">
+                                <div class="dish-category">Seafood</div>
+                                <div class="dish-price"><span>$</span>42</div>
+                            </div>
+                            <h3 class="dish-name">Mediterranean Salmon</h3>
+                            <p class="dish-description">Wild-caught salmon grilled to perfection, served with
+                                herb-infused quinoa and seasonal vegetables</p>
+                            <div class="dish-footer">
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop"
+                                alt="Truffle Risotto">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-category">Italian</div>
+                            <h3 class="dish-name">Truffle Risotto</h3>
+                            <p class="dish-description">Creamy Arborio rice infused with black truffle, aged parmesan,
+                                and wild mushrooms</p>
+                            <div class="dish-footer">
+                                <div class="dish-price"><span>$</span>38</div>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&h=600&fit=crop"
+                                alt="Wagyu Steak">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-category">Steakhouse</div>
+                            <h3 class="dish-name">Wagyu Steak</h3>
+                            <p class="dish-description">Grade A5 Japanese Wagyu, seared and finished with herb butter,
+                                roasted garlic, and asparagus</p>
+                            <div class="dish-footer">
+                                <div class="dish-price"><span>$</span>85</div>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&h=600&fit=crop"
+                                alt="Margherita Pizza">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-category">Italian</div>
+                            <h3 class="dish-name">Neapolitan Pizza</h3>
+                            <p class="dish-description">Wood-fired perfection with San Marzano tomatoes, fresh
+                                mozzarella, and basil on sourdough crust</p>
+                            <div class="dish-footer">
+                                <div class="dish-price"><span>$</span>28</div>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&h=600&fit=crop"
+                                alt="Sushi Platter">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-category">Japanese</div>
+                            <h3 class="dish-name">Omakase Selection</h3>
+                            <p class="dish-description">Chef's choice of premium sushi and sashimi featuring daily
+                                catches and traditional preparations</p>
+                            <div class="dish-footer">
+                                <div class="dish-price"><span>$</span>65</div>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=800&h=600&fit=crop"
+                                alt="Lobster Pasta">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-category">Seafood</div>
+                            <h3 class="dish-name">Lobster Linguine</h3>
+                            <p class="dish-description">Fresh Maine lobster tossed with handmade pasta in a delicate
+                                saffron cream sauce</p>
+                            <div class="dish-footer">
+                                <div class="dish-price"><span>$</span>52</div>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-dots" id="sliderDots"></div>
+        </section>
+        <!-- featured dishes end -->
+
         <!-- upcoming_events -->
         <section class="upcoming_events">
-            <div class="heading-container">
+            <div class="section-header">
                 <h2>Upcoming events</h2>
                 <p>Commodi rem veritatis quis eaque mollitia.</p>
             </div>
@@ -388,7 +630,7 @@
 
         <!-- gallery -->
         <section class="gallery">
-            <div class="heading-container">
+            <div class="section-header">
                 <h2>Our gallery</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </div>
