@@ -402,8 +402,12 @@
             </div>
 
             <div class="slider-container">
-                <button class="slider-nav prev" onclick="moveSlide(-1)" aria-label="Previous">‹</button>
-                <button class="slider-nav next" onclick="moveSlide(1)" aria-label="Next">›</button>
+                <button class="slider-nav prev" onclick="moveSlide(-1)" aria-label="Previous">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path></svg>
+                </button>
+                <button class="slider-nav next" onclick="moveSlide(1)" aria-label="Next">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path></svg>
+                </button>
 
                 <div class="slider-wrapper" id="sliderWrapper">
                     <div class="dish-card">
@@ -420,7 +424,7 @@
                             <p class="dish-description">Wild-caught salmon grilled to perfection, served with
                                 herb-infused quinoa and seasonal vegetables</p>
                             <div class="dish-footer">
-                                <button class="order-btn">Order Now</button>
+                                <button class="order-btn primary-btn">Order Now</button>
                             </div>
                         </div>
                     </div>
@@ -431,13 +435,15 @@
                                 alt="Truffle Risotto">
                         </div>
                         <div class="dish-content">
-                            <div class="dish-category">Italian</div>
+                            <div class="dish-header">
+                                <div class="dish-category">Italian</div>
+                                <div class="dish-price"><span>$</span>38</div>
+                            </div>
                             <h3 class="dish-name">Truffle Risotto</h3>
                             <p class="dish-description">Creamy Arborio rice infused with black truffle, aged parmesan,
                                 and wild mushrooms</p>
                             <div class="dish-footer">
-                                <div class="dish-price"><span>$</span>38</div>
-                                <button class="order-btn">Order Now</button>
+                                <button class="order-btn primary-btn">Order Now</button>
                             </div>
                         </div>
                     </div>
@@ -448,13 +454,15 @@
                                 alt="Wagyu Steak">
                         </div>
                         <div class="dish-content">
-                            <div class="dish-category">Steakhouse</div>
+                            <div class="dish-header">
+                                <div class="dish-category">Steakhouse</div>
+                                <div class="dish-price"><span>$</span>85</div>
+                            </div>
                             <h3 class="dish-name">Wagyu Steak</h3>
                             <p class="dish-description">Grade A5 Japanese Wagyu, seared and finished with herb butter,
                                 roasted garlic, and asparagus</p>
                             <div class="dish-footer">
-                                <div class="dish-price"><span>$</span>85</div>
-                                <button class="order-btn">Order Now</button>
+                                <button class="order-btn primary-btn">Order Now</button>
                             </div>
                         </div>
                     </div>
@@ -465,13 +473,15 @@
                                 alt="Margherita Pizza">
                         </div>
                         <div class="dish-content">
-                            <div class="dish-category">Italian</div>
+                            <div class="dish-header">
+                                <div class="dish-category">Italian</div>
+                                <div class="dish-price"><span>$</span>28</div>
+                            </div>
                             <h3 class="dish-name">Neapolitan Pizza</h3>
                             <p class="dish-description">Wood-fired perfection with San Marzano tomatoes, fresh
                                 mozzarella, and basil on sourdough crust</p>
                             <div class="dish-footer">
-                                <div class="dish-price"><span>$</span>28</div>
-                                <button class="order-btn">Order Now</button>
+                                <button class="order-btn primary-btn">Order Now</button>
                             </div>
                         </div>
                     </div>
@@ -482,13 +492,15 @@
                                 alt="Sushi Platter">
                         </div>
                         <div class="dish-content">
-                            <div class="dish-category">Japanese</div>
+                            <div class="dish-header">
+                                <div class="dish-category">Japanese</div>
+                                <div class="dish-price"><span>$</span>65</div>
+                            </div>
                             <h3 class="dish-name">Omakase Selection</h3>
                             <p class="dish-description">Chef's choice of premium sushi and sashimi featuring daily
                                 catches and traditional preparations</p>
                             <div class="dish-footer">
-                                <div class="dish-price"><span>$</span>65</div>
-                                <button class="order-btn">Order Now</button>
+                                <button class="order-btn primary-btn">Order Now</button>
                             </div>
                         </div>
                     </div>
@@ -499,13 +511,15 @@
                                 alt="Lobster Pasta">
                         </div>
                         <div class="dish-content">
-                            <div class="dish-category">Seafood</div>
+                            <div class="dish-header">
+                                <div class="dish-category">Seafood</div>
+                                <div class="dish-price"><span>$</span>52</div>
+                            </div>
                             <h3 class="dish-name">Lobster Linguine</h3>
                             <p class="dish-description">Fresh Maine lobster tossed with handmade pasta in a delicate
                                 saffron cream sauce</p>
                             <div class="dish-footer">
-                                <div class="dish-price"><span>$</span>52</div>
-                                <button class="order-btn">Order Now</button>
+                                <button class="order-btn primary-btn">Order Now</button>
                             </div>
                         </div>
                     </div>

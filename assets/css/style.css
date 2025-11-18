@@ -54,6 +54,7 @@
   --white: #ffffff;
   --black: #000000;
   --opacity: 0.99;
+  --border-color: rgba(108, 117, 125, 0.15);
 }
 
 :root[data-theme='dark'] {
@@ -967,6 +968,9 @@ section {
 }
 
 @media (max-width: 768px) {
+  .form-container {
+    padding: 0;
+  }
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -984,7 +988,6 @@ section {
 /* reservation end */
 
 /* featured */
-
 .section-label {
   font-size: 14px;
   letter-spacing: 3px;
@@ -1004,19 +1007,17 @@ section {
   display: flex;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   gap: 30px;
+  padding-bottom: 10px;
 }
 
 .dish-card {
   min-width: calc(33.333% - 20px);
-  background: var(--theme-color);
   border-radius: 20px;
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   cursor: pointer;
-}
-
-.dish-card:hover {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .dish-image {
@@ -1089,26 +1090,17 @@ section {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
-  border-top: 1px solid rgba(108, 117, 125, 0.15);
+  border-top: 1px solid var(--border-color);
 }
 
 .order-btn {
-  background: var(--primary-color);
-  color: var(--white);
-  width: 100%;
-  border: none;
-  padding: 14px 32px;
   border-radius: 50px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  width: 100%;
+  color: var(--sec-text-color);
 }
 
 .order-btn:hover {
-  background: var(--neutral-color);
+  background: var(--);
   transform: translateX(5px);
 }
 
@@ -1118,7 +1110,8 @@ section {
   transform: translateY(-50%);
   width: 50px;
   height: 50px;
-  background: var(--primary-color);
+  background: rgb(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
   border: none;
   border-radius: 50%;
   color: var(--white);
@@ -1132,16 +1125,16 @@ section {
 }
 
 .slider-nav:hover {
-  background: var(--neutral-color);
   transform: translateY(-50%) scale(1.1);
 }
 
 .slider-nav.prev {
-  left: 0;
+  left: 30px;
+  display: none;
 }
 
 .slider-nav.next {
-  right: 0;
+  right: 30px;
 }
 
 .slider-dots {
@@ -1174,13 +1167,9 @@ section {
   }
 }
 
-@media (max-width: 768px) {
-  body {
-    padding: 40px 15px;
-  }
-
+@media (max-width: 767px) {
   .slider-container {
-    padding: 0 50px;
+    padding: 0 20px !important;
   }
 
   .dish-card {
@@ -1189,10 +1178,6 @@ section {
 
   .section-header {
     margin-bottom: 50px;
-  }
-
-  .dish-image {
-    height: 260px;
   }
 
   .dish-content {
@@ -1231,6 +1216,7 @@ section {
     text-align: center;
   }
 }
+
 /* featured end */
 
 /* upcoming_events */
