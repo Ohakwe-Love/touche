@@ -76,9 +76,6 @@
   --light-color: #ffffff;
 }
 
-/* Header text is white when header is transparent (not scrolled) */
-
-/* Switch icon and movement for dark mode using prefers-color-scheme */
 @media (prefers-color-scheme: dark) {
   .switch::before {
     content: "\f186";
@@ -87,14 +84,11 @@
   }
 }
 
-/* Header text is white in dark mode, always */
 @media (prefers-color-scheme: dark) {
-
   .site-header,
   .site-header.scrolled,
   .site-header nav ul li a,
   .site-header.scrolled nav ul li a,
-  .site-header a.logo h2,
   .site-header.scrolled a.logo h2,
   .site-header a,
   .site-header .nav-toggle,
@@ -213,16 +207,28 @@ body {
   color: var(--light-color);
 }
 
+.site-header nav ul li a.active {
+  color: var(--primary-color) !important;
+}
+
+.site-header.scrolled nav ul li a.active {
+  color: var(--primary-color) !important;
+}
+
 .site-header a.logo h2 {
   font-size: 30px;
   font-weight: 300;
   font-style: italic;
   transition: 0.5s ease;
+  color: var(--white);
+}
+
+.site-header a.logo.active h2 {
+  color: var(--primary-color) !important;
 }
 
 .site-header,
-.site-header nav ul li a,
-.site-header a.logo h2,
+.site-header nav ul li a
 .site-header .open-nav,
 .site-header a {
   color: var(--white) !important;
@@ -232,11 +238,9 @@ body {
 /* Header text changes when scrolled */
 .site-header.scrolled,
 .site-header.scrolled nav ul li a,
-.site-header.scrolled a.logo h2,
 .site-header.scrolled .open-nav,
 .site-header.scrolled a {
   color: var(--dark-color) !important;
-  /* or #000 for black */
 }
 
 .site-header a:hover,
@@ -320,7 +324,7 @@ body {
   flex-direction: column;
   gap: 30px;
   list-style-type: none;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 .small-screen-nav ul a {
@@ -331,7 +335,7 @@ body {
 .small-screen-footer {
   align-items: flex-start;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .small-screen-footer .hero-footer-col a {
@@ -372,16 +376,16 @@ body {
   .small-screen-theme-toggle {
     display: block;
   }
+}
 
-  /* 
-  .small-screen-nav {
-    left: 0;
-  } */
+@media (max-width: 600px) {
+  .small-screen-footer {
+    display: flex !important;
+  }
 }
 
 .hero-container {
   padding: 0;
-  background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("../imgs/1.jpg") center/cover;
   background-attachment: fixed;
 }
 
@@ -411,6 +415,12 @@ body {
 }
 
 .hero-text h1 {
+  font-size: 75px;
+  line-height: 2;
+  color: var(--white);
+}
+
+.hero-text h2 {
   font-size: 75px;
   line-height: 2;
   color: var(--white);
