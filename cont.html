@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Section</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --theme-color: #e9ecef;
+            --neutral-color: #000000;
+            --primary-text-color: #6C757D;
+            --normal-text-color: #ffffffbf;
+            --sec-text-color: #6C757D;
+            --primary-font-family: "Lato", sans-serif;
+            --heading-font-family: "Playfair Display", serif;
+            --primary-color: #f5a637;
+            --dark-color: #000000;
+            --light-color: #ffffff;
+            --white: #ffffff;
+            --black: #000000;
+            --opacity: 0.99;
+            --border-color: rgba(108, 117, 125, 0.15);
+        }
+
+        :root[data-theme='dark'] {
+            --bg: #212529;
+            --theme-color: #343A40;
+            --neutral-color: #ffffff;
+            --primary-text-color: #adb5bd;
+            --dark-color: #ffffff;
+            --light-color: #181818;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--primary-font-family);
+            background-color: var(--bg);
+            color: var(--neutral-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .contact-section {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-form {
+            position: relative;
+        }
+
+        .decorative-dots {
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background-image: radial-gradient(circle, var(--border-color) 2px, transparent 2px);
+            background-size: 12px 12px;
+            opacity: 0.5;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-header h1 {
+            font-family: var(--heading-font-family);
+            font-size: 2.5rem;
+            color: var(--neutral-color);
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .contact-header p {
+            color: var(--primary-text-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg);
+            color: var(--neutral-color);
+            font-family: var(--primary-font-family);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--primary-text-color);
+            opacity: 0.7;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 15px 40px;
+            background-color: transparent;
+            color: var(--neutral-color);
+            border: 1px solid var(--border-color);
+            font-family: var(--primary-font-family);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .contact-info {
+            padding-top: 80px;
+        }
+
+        .info-item {
+            margin-bottom: 35px;
+        }
+
+        .info-item h3 {
+            font-family: var(--primary-font-family);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--neutral-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .info-item a,
+        .info-item p {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .info-item a:hover {
+            opacity: 0.7;
+        }
+
+        .info-item p {
+            color: var(--primary-text-color);
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--primary-font-family);
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            display: none;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-info {
+                padding-top: 0;
+            }
+
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+
+            .decorative-dots {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+    <div class="contact-section">
+        <div class="contact-form">
+            <div class="decorative-dots"></div>
+
+            <div class="contact-header">
+                <h1>Get in touch with us</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquam illa praesent sequi in cum, beatae
+                    maiores quae qui.</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                Message sent successfully! We'll get back to you soon.
+            </div>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Full name" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" placeholder="E-mail address" required>
+                </div>
+
+                <div class="form-group">
+                    <textarea placeholder="Message" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <div class="info-item">
+                <h3>Write Us</h3>
+                <a href="mailto:admin@domain.com">admin@domain.com</a>
+            </div>
+
+            <div class="info-item">
+                <h3>Call Us</h3>
+                <a href="tel:+1987654321">+1 987 654 321</a>
+            </div>
+
+            <div class="info-item">
+                <h3>Visit Us</h3>
+                <p>1234 Altschul, New York, NY 10027-0000</p>
+            </div>
+
+            <div class="info-item">
+                <h3>Social Links</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const root = document.documentElement;
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', newTheme);
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+
+            this.reset();
+
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        });
+    </script>
+</body>
+
+</html>

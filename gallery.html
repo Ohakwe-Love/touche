@@ -7,7 +7,7 @@
     <title>Touché</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/gallery.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
 
     <!-- icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,15 +17,23 @@
 
     <input type="checkbox" id="modeToggle" hidden />
     <main class="main-container">
+        <!-- hero container -->
         <section class="hero-container gallery-hero">
-            <!-- header -->
             <header class="site-header">
                 <div class="container">
                     <nav>
+                        <button class="open-nav nav-toggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.5956 3.90332L15.9994 8.49951L20.5956 13.0957L22.0098 11.6815L18.8278 8.49951L22.0098 5.31753L20.5956 3.90332ZM21 19.9995V17.9995H3V19.9995H21ZM12 12.9995V10.9995H3V12.9995H12ZM12 5.99951V3.99951H3V5.99951H12Z">
+                                </path>
+                            </svg>
+                        </button>
+
                         <ul>
-                            <li><a href="about-us.html">about us</a></li>
+                            <li><a href="about.html">about us</a></li>
                             <li><a href="menu.html">menu</a></li>
-                            <li><a href="reservation.html">reservation</a></li>
+                            <li><a href="reservation.html" class="">reservation</a></li>
                         </ul>
 
                         <a href="index.html" class="logo">
@@ -33,39 +41,94 @@
                         </a>
 
                         <ul>
-                            <li><a href="events.html">news & events</a></li>
-                            <li><a href="gallery.html">gallery</a></li>
+                            <li><a href="news.html">news & events</a></li>
+                            <li><a href="gallery.html" class="active">gallery</a></li>
                             <li><a href="contact.html">contact</a></li>
                             <li class="theme-toggle">
                                 <label for="modeToggle" class="switch"></label>
                             </li>
                         </ul>
 
-                        <span class="menu-toggle">
-                            <i class="fa-solid fa-bars"></i>
+                        <span class="theme-toggle small-screen-theme-toggle">
+                            <label for="modeToggle" class="switch"></label>
                         </span>
                     </nav>
                 </div>
+            </header>
 
-                <div class="hero-wrapper">
-                    <div class="hero-content">
-                        <h6><span></span></h6>
+            <div class="small-screen-nav" id="small-screen-nav">
+                <button class="close-nav nav-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M4.40347 3.90332L2.98926 5.31753L6.17124 8.49951L2.98926 11.6815L4.40347 13.0957L8.99967 8.49951L4.40347 3.90332ZM20.9997 19.9995V17.9995H2.99967V19.9995H20.9997ZM20.9997 12.9995V10.9995H11.9997V12.9995H20.9997ZM20.9997 5.99951V3.99951H11.9997V5.99951H20.9997Z">
+                        </path>
+                    </svg>
+                </button>
+
+                <ul>
+                    <li><a href="about.html">about us</a></li>
+                    <li><a href="menu.html">menu</a></li>
+                    <li><a href="reservation.html" class="active">reservation</a></li>
+                    <li><a href="news.html">news & events</a></li>
+                    <li><a href="gallery.html" class="active">gallery</a></li>
+                    <li><a href="contact.html">contact</a></li>
+                </ul>
+
+                <div class="hero-footer small-screen-footer">
+                    <div class="socials hero-footer-col">
+                        <a href="https://www.instagram.com/touche.cafe/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12.001 9C10.3436 9 9.00098 10.3431 9.00098 12C9.00098 13.6573 10.3441 15 12.001 15C13.6583 15 15.001 13.6569 15.001 12C15.001 10.3427 13.6579 9 12.001 9ZM12.001 7C14.7614 7 17.001 9.2371 17.001 12C17.001 14.7605 14.7639 17 12.001 17C9.24051 17 7.00098 14.7629 7.00098 12C7.00098 9.23953 9.23808 7 12.001 7ZM18.501 6.74915C18.501 7.43926 17.9402 7.99917 17.251 7.99917C16.5609 7.99917 16.001 7.4384 16.001 6.74915C16.001 6.0599 16.5617 5.5 17.251 5.5C17.9393 5.49913 18.501 6.0599 18.501 6.74915ZM12.001 4C9.5265 4 9.12318 4.00655 7.97227 4.0578C7.18815 4.09461 6.66253 4.20007 6.17416 4.38967C5.74016 4.55799 5.42709 4.75898 5.09352 5.09255C4.75867 5.4274 4.55804 5.73963 4.3904 6.17383C4.20036 6.66332 4.09493 7.18811 4.05878 7.97115C4.00703 9.0752 4.00098 9.46105 4.00098 12C4.00098 14.4745 4.00753 14.8778 4.05877 16.0286C4.0956 16.8124 4.2012 17.3388 4.39034 17.826C4.5591 18.2606 4.7605 18.5744 5.09246 18.9064C5.42863 19.2421 5.74179 19.4434 6.17187 19.6094C6.66619 19.8005 7.19148 19.9061 7.97212 19.9422C9.07618 19.9939 9.46203 20 12.001 20C14.4755 20 14.8788 19.9934 16.0296 19.9422C16.8117 19.9055 17.3385 19.7996 17.827 19.6106C18.2604 19.4423 18.5752 19.2402 18.9074 18.9085C19.2436 18.5718 19.4445 18.2594 19.6107 17.8283C19.8013 17.3358 19.9071 16.8098 19.9432 16.0289C19.9949 14.9248 20.001 14.5389 20.001 12C20.001 9.52552 19.9944 9.12221 19.9432 7.97137C19.9064 7.18906 19.8005 6.66149 19.6113 6.17318C19.4434 5.74038 19.2417 5.42635 18.9084 5.09255C18.573 4.75715 18.2616 4.55693 17.8271 4.38942C17.338 4.19954 16.8124 4.09396 16.0298 4.05781C14.9258 4.00605 14.5399 4 12.001 4ZM12.001 2C14.7176 2 15.0568 2.01 16.1235 2.06C17.1876 2.10917 17.9135 2.2775 18.551 2.525C19.2101 2.77917 19.7668 3.1225 20.3226 3.67833C20.8776 4.23417 21.221 4.7925 21.476 5.45C21.7226 6.08667 21.891 6.81333 21.941 7.8775C21.9885 8.94417 22.001 9.28333 22.001 12C22.001 14.7167 21.991 15.0558 21.941 16.1225C21.8918 17.1867 21.7226 17.9125 21.476 18.55C21.2218 19.2092 20.8776 19.7658 20.3226 20.3217C19.7668 20.8767 19.2076 21.22 18.551 21.475C17.9135 21.7217 17.1876 21.89 16.1235 21.94C15.0568 21.9875 14.7176 22 12.001 22C9.28431 22 8.94514 21.99 7.87848 21.94C6.81431 21.8908 6.08931 21.7217 5.45098 21.475C4.79264 21.2208 4.23514 20.8767 3.67931 20.3217C3.12348 19.7658 2.78098 19.2067 2.52598 18.55C2.27848 17.9125 2.11098 17.1867 2.06098 16.1225C2.01348 15.0558 2.00098 14.7167 2.00098 12C2.00098 9.28333 2.01098 8.94417 2.06098 7.8775C2.11014 6.8125 2.27848 6.0875 2.52598 5.45C2.78014 4.79167 3.12348 4.23417 3.67931 3.67833C4.23514 3.1225 4.79348 2.78 5.45098 2.525C6.08848 2.2775 6.81348 2.11 7.87848 2.06C8.94514 2.0125 9.28431 2 12.001 2Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/touche.cafe" target="_blank" rel="noopener noreferrer"
+                            aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47062 14 5.5 16 5.5H17.5V2.1401C17.1743 2.09685 15.943 2 14.6429 2C11.9284 2 10 3.65686 10 6.69971V9.5H7V13.5H10V22H14V13.5Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/touche_cafe" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M10.4883 14.651L15.25 21H22.25L14.3917 10.5223L20.9308 3H18.2808L13.1643 8.88578L8.75 3H1.75L9.26086 13.0145L2.31915 21H4.96917L10.4883 14.651ZM16.25 19L5.75 5H7.75L18.25 19H16.25Z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="location hero-footer-col">
+                        <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364ZM12 15C14.2091 15 16 13.2091 16 11C16 8.79086 14.2091 7 12 7C9.79086 7 8 8.79086 8 11C8 13.2091 9.79086 15 12 15ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z">
+                            </path>
+                        </svg>
+                        <p>1234 Dining Str., Los Angeles, CA 12345-0000</p>
                     </div>
                 </div>
-            </header>
-            <!-- header end -->
+            </div>
+
             <div class="hero-content">
-               <div class="container">
+                <div class="container">
                     <div class="hero-text">
-                        <h1>Our Gallery</h1>
+                        <h2>Our Gallery</h2>
+                        <p>
+                            A unique café located in the heart of Los Angeles. Always fresh coffee and biscuits. Open
+                            for indoor dining and to-go orders.
+                        </p>
                     </div>
-               </div>
+                </div>
             </div>
         </section>
+        <!-- hero-container end -->
 
         <!-- gallery -->
         <section class="gallery">
-            <div class="heading-container">
+            <div class="section-header">
                 <h2>Our gallery</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </div>
@@ -75,14 +138,151 @@
                     <img src="assets/imgs/15.jpg" alt="Gallery Image 2">
                     <img src="assets/imgs/18.jpg" alt="Gallery Image 3">
                     <img src="assets/imgs/16.jpg" alt="Gallery Image 4">
-                    <img src="assets/imgs/12.jpg" alt="Gallery Image 6">
-                    <img src="assets/imgs/13.jpg" alt="Gallery Image 5">
-                    <img src="assets/imgs/14.jpg" alt="Gallery Image 5">
-                    <img src="assets/imgs/17.jpg" alt="Gallery Image 6">
+                    <img src="assets/imgs/12.jpg" alt="Gallery Image 5">
+                    <img src="assets/imgs/13.jpg" alt="Gallery Image 6">
+                    <img src="assets/imgs/14.jpg" alt="Gallery Image 7">
+                    <img src="assets/imgs/17.jpg" alt="Gallery Image 8">
                 </div>
             </div>
         </section>
         <!-- gallery end -->
+
+        <!-- featured dishes -->
+        <section class="featured">
+            <div class="section-header">
+                <div class="section-label">Signature Collection</div>
+                <h2>Featured Dishes</h2>
+                <p>Handcrafted culinary masterpieces that define our kitchen's excellence</p>
+            </div>
+
+            <div class="slider-container">
+                <button class="slider-nav prev" onclick="moveSlide(-1)" aria-label="Previous">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path></svg>
+                </button>
+                <button class="slider-nav next" onclick="moveSlide(1)" aria-label="Next">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path></svg>
+                </button>
+
+                <div class="slider-wrapper" id="sliderWrapper">
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="assets/imgs/featured-dishes/1.jpeg"
+                                alt="Mediterranean Salmon">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-header">
+                                <div class="dish-category">Seafood</div>
+                                <div class="dish-price"><span>$</span>42</div>
+                            </div>
+                            <h3 class="dish-name">Mediterranean Salmon</h3>
+                            <p class="dish-description">Wild-caught salmon grilled to perfection, served with
+                                herb-infused quinoa and seasonal vegetables</p>
+                            <div class="dish-footer">
+                                <button class="order-btn primary-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="assets/imgs/featured-dishes/2.jpeg"
+                                alt="Truffle Risotto">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-header">
+                                <div class="dish-category">Italian</div>
+                                <div class="dish-price"><span>$</span>38</div>
+                            </div>
+                            <h3 class="dish-name">Truffle Risotto</h3>
+                            <p class="dish-description">Creamy Arborio rice infused with black truffle, aged parmesan,
+                                and wild mushrooms</p>
+                            <div class="dish-footer">
+                                <button class="order-btn primary-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="assets/imgs/featured-dishes/3.jpeg"
+                                alt="Wagyu Steak">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-header">
+                                <div class="dish-category">Steakhouse</div>
+                                <div class="dish-price"><span>$</span>85</div>
+                            </div>
+                            <h3 class="dish-name">Wagyu Steak</h3>
+                            <p class="dish-description">Grade A5 Japanese Wagyu, seared and finished with herb butter,
+                                roasted garlic, and asparagus</p>
+                            <div class="dish-footer">
+                                <button class="order-btn primary-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="assets/imgs/featured-dishes/4.jpeg"
+                                alt="Margherita Pizza">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-header">
+                                <div class="dish-category">Italian</div>
+                                <div class="dish-price"><span>$</span>28</div>
+                            </div>
+                            <h3 class="dish-name">Neapolitan Pizza</h3>
+                            <p class="dish-description">Wood-fired perfection with San Marzano tomatoes, fresh
+                                mozzarella, and basil on sourdough crust</p>
+                            <div class="dish-footer">
+                                <button class="order-btn primary-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="assets/imgs/featured-dishes/5.jpeg"
+                                alt="Sushi Platter">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-header">
+                                <div class="dish-category">Japanese</div>
+                                <div class="dish-price"><span>$</span>65</div>
+                            </div>
+                            <h3 class="dish-name">Omakase Selection</h3>
+                            <p class="dish-description">Chef's choice of premium sushi and sashimi featuring daily
+                                catches and traditional preparations</p>
+                            <div class="dish-footer">
+                                <button class="order-btn primary-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <div class="dish-image">
+                            <img src="assets/imgs/featured-dishes/6.jpeg"
+                                alt="Lobster Pasta">
+                        </div>
+                        <div class="dish-content">
+                            <div class="dish-header">
+                                <div class="dish-category">Seafood</div>
+                                <div class="dish-price"><span>$</span>52</div>
+                            </div>
+                            <h3 class="dish-name">Lobster Linguine</h3>
+                            <p class="dish-description">Fresh Maine lobster tossed with handmade pasta in a delicate
+                                saffron cream sauce</p>
+                            <div class="dish-footer">
+                                <button class="order-btn primary-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-dots" id="sliderDots"></div>
+        </section>
+        <!-- featured dishes end -->
 
         <!-- footer -->
         <footer>
@@ -91,18 +291,19 @@
                     <div class="footer-col">
                         <h3>About Us</h3>
                         <p>
-                            Touché is a cozy café and restaurant located in the heart of Los Angeles, offering a unique dining experience with a focus on fresh ingredients and exceptional service.   
+                            Touché is a cozy café and restaurant located in the heart of Los Angeles, offering a unique
+                            dining experience with a focus on fresh ingredients and exceptional service.
                         </p>
                     </div>
                     <div class="footer-col">
                         <h3>Links</h3>
                         <ul>
-                            <li><a href="">about</a></li>
-                            <li><a href="">contact</a></li>
-                            <li><a href="">gallery</a></li>
-                            <li><a href="">menu</a></li>
-                            <li><a href="">reservation</a></li>
-                            <li><a href="">news & events</a></li>
+                            <li><a href="about.html">about</a></li>
+                            <li><a href="contact.html">contact</a></li>
+                            <li><a href="gallery.html" class="active">gallery</a></li>
+                            <li><a href="menu.html">menu</a></li>
+                            <li><a href="reservation.html">reservation</a></li>
+                            <li><a href="news.html">news & events</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -139,71 +340,7 @@
         <!-- footer end -->
     </main>
 
-    <script>
-        // Theme Toggle Functionality (no dark-mode class)
-        document.addEventListener('DOMContentLoaded', function () {
-            const modeToggle = document.getElementById('modeToggle');
-            // Check for saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                if (savedTheme === 'dark') {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    modeToggle.checked = true;
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                    modeToggle.checked = false;
-                }
-            } else {
-                // No saved theme: use system preference
-                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    modeToggle.checked = true;
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                    modeToggle.checked = false;
-                }
-            }
-
-            // Handle toggle change
-            modeToggle.addEventListener('change', function () {
-                if (this.checked) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                    localStorage.setItem('theme', 'light');
-                }
-            });
-
-            // Listen for system theme changes
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (!localStorage.getItem('theme')) {
-                    if (e.matches) {
-                        document.documentElement.setAttribute('data-theme', 'dark');
-                        modeToggle.checked = true;
-                    } else {
-                        document.documentElement.setAttribute('data-theme', 'light');
-                        modeToggle.checked = false;
-                    }
-                }
-            });
-        });
-
-        // Scroll Header Functionality & force white text at top
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.site-header');
-            const headerLinks = header.querySelectorAll('a, a.logo h2, nav ul li a');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-                // Remove inline color to restore theme-based color
-                headerLinks.forEach(el => el.style.color = '');
-            } else {
-                header.classList.remove('scrolled');
-                // Force white color for all header text
-                headerLinks.forEach(el => el.style.color = '#fff');
-            }
-        });
-    </script>
+    <script src="assets/js/script.js"></script>
 
 </body>
 

@@ -461,3 +461,22 @@ slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
 slider.addEventListener('mouseleave', () => {
     autoSlide = setInterval(() => moveSlide(1), 5000);
 });
+
+// contactForm Submission Handling
+
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const successMessage = document.getElementById('successMessage');
+        successMessage.classList.add('show');
+
+        this.reset();
+
+        setTimeout(() => {
+            successMessage.classList.remove('show');
+        }, 5000);
+    });
+}
