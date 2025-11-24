@@ -1,28 +1,238 @@
 /* main hero */
 .main-hero {
-  background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("../imgs/hero-bgs/1.jpg") center/cover;
+    background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("../imgs/hero-bgs/1.jpg") center/cover;
 }
 
 .about-hero {
     background: linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("../imgs/hero-bgs/2.jpg") center/cover;
 }
 
-.menu-hero {
+.menu-hero {}
 
+.reservation-hero {}
+
+.news-hero {}
+
+.gallery-hero {}
+
+.contact-hero {}
+
+
+/* about-section */
+.about-section {
+    padding: 3rem 0;
 }
 
-.reservation-hero {
-    
+.about-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
 }
 
-.news-hero {
-
+.about-col:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-.gallery-hero {
-
+.about-msg {
+    padding-top: 20px;
+    width: 40%;
+    font-weight: 600;
+    line-height: 1.6;
+    position: relative;
 }
 
-.contact-hero {
-    
+.about-msg::before {
+    content: "";
+    position: absolute;
+    display: block;
+    background: var(--primary-color);
+    top: 0;
+    left: 0;
+    width: 50px;
+    border-radius: 5px;
+    height: 2px;
+}
+
+.about-img {
+    width: 55%;
+
+    img {
+        width: 100%;
+    }
+}
+
+.about-col:nth-child(2) h2 {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+    .about-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+}
+
+.bts-row .primary-btn {
+    color: var(--dark-color);
+}
+
+.bts-col:nth-child(1) {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bts-col:nth-child(1) h3 {
+    font-size: 20px;
+    font-family: var(--primary-font-family);
+}
+
+.bts-col:nth-child(2) {
+    img {
+        width: 100%;
+    }
+}
+
+.chef-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.chef-card {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.chef-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.chef-details {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    height: 80px;
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.chef-info {
+    display: flex;
+    align-items: center;
+    transform: translateY(30px);
+    justify-content: space-between;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.view-info {
+    width: 35px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: var(--white);
+    height: 35px;
+}
+
+.chef-details:hover {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65));
+    height: 100%;
+    backdrop-filter: blur(0px);
+    border-radius: 0;
+}
+
+.chef-details:hover .social-links {
+    opacity: 1;
+    visibility: visible;
+}
+
+.chef-details:hover .chef-info {
+    transform: translateY(0);
+}
+
+.chef-info h4 {
+    margin-bottom: 4px;
+    color: var(--white);
+    font-family: var(--primary-font-family);
+}
+
+.chef-info span {
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.chef-card .social-links {
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    visibility: hidden;
+    margin: 0;
+    transition: var(--transition);
+}
+
+.chef-card .social-link {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1rem;
+    transition: 0.5s ease-in-out;
+    backdrop-filter: blur(10px);
+
+    svg {
+        fill: var(--white);
+    }
+}
+
+.chef-card .social-link:hover {
+    background: var(--white);
+    color: var(--dark-color);
+    transform: translateY(-2px);
+
+    svg {
+        fill: var(--dark-color);
+    }
+}
+
+@media (max-width: 900px) {
+    .bts-row {
+        grid-template-columns: 1fr;
+        
+    }
 }
